@@ -9,7 +9,7 @@ module.exports = function (grunt) {
             },
             watch: {
                 scripts: {
-                    files: ['app/*'],
+                    files: ['app/**'],
                     options: {
                         nospawn: true
                     }
@@ -50,8 +50,13 @@ module.exports = function (grunt) {
 
     grunt.event.on('watch', function (action, filepath) {
         var destinationPath = "../src/main/webapp/";
-        grunt.log.writeln(filepath + " changed");
-        grunt.file.copy(filepath, destinationPath + filepath)
+        if (action === 'deleted') {
+            grunt.log.writeln("WARNING: File " + filepath + " deleted");
+        }
+        else {
+            grunt.log.writeln(filepath + " " + action);
+            grunt.file.copy(filepath, destinationPath + filepath);
+        }
     });
 
     grunt.loadNpmTasks('grunt-karma');
