@@ -1,0 +1,20 @@
+<html ng-app="myApp">  
+    <head lang="en">
+        <title>ngGridDemo</title>  
+        <link rel="stylesheet" type="text/css" href="css/ng-grid.min.css" />
+        <link rel="stylesheet" type="text/css" href="css/style.css" />
+        <script type="text/javascript" src="js/jquery-1.10.1.min.js"></script> 
+        <script type="text/javascript" src="js/angular.min.js"></script>
+        <script type="text/javascript" src="js/ng-grid.min.js"></script>
+        <script type="text/javascript" src="js/ngGridDemo.js"></script>
+        
+    </head>
+    <body ng-controller="MyCtrl">
+			<br>
+			<div ng-repeat="tab in filterTabs">
+				<div>{{tab.title}}</div>
+			    <div class="gridStyle" ng-grid="tab.grid"></div>    
+			    <br>   
+			</div>
+    </body>
+</html>
