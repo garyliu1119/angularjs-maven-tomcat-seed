@@ -1,0 +1,77 @@
+<!doctype html>
+<html ng-app="AccordionDemo">
+
+<head>
+	<title>AccordionDemo</title>
+	<script	src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.19/angular.js"></script>
+	<script	src="//angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.11.0.js"></script>
+	<link	href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css"	rel="stylesheet">
+	
+	<link rel="stylesheet" type="text/css" href="css/ng-grid.min.css" />
+    <link rel="stylesheet" type="text/css" href="css/style.css" />
+    <script type="text/javascript" src="js/jquery-1.10.1.min.js"></script> 
+    <script type="text/javascript" src="js/ng-grid.min.js"></script>
+    <script type="text/javascript" src="js/ngGridDemo.js"></script>
+	
+	
+	<script src="js/AccordionDemo.js"></script>
+</head>
+
+<body>
+
+	<div ng-controller="AccordionDemoCtrl">
+		<p>
+			<button class="btn btn-default btn-sm" ng-click="status.open = !status.open">Toggle last panel</button>
+			<button class="btn btn-default btn-sm" ng-click="status.isFirstDisabled = ! status.isFirstDisabled">Enable / Disable first panel</button>
+		</p>
+
+		<label class="checkbox"> <input type="checkbox"
+			ng-model="oneAtATime"> Open only one at a time
+		</label>
+		
+		<accordion close-others="oneAtATime">
+			<accordion-group	heading="Static Header, initially expanded"	is-open="status.isFirstOpen" is-disabled="status.isFirstDisabled">
+				This content is straight in the template. 
+			</accordion-group> 
+		
+			<accordion-group heading="{{group.title}}" ng-repeat="group in groups">
+				<ul>
+					<li ng-repeat="content in group.content">{{content}}</li>
+				</ul>
+				
+			</accordion-group> 
+		
+			<accordion-group heading="Tiers Management">
+				<p>Demo Adding Tier</p>
+				<button class="btn btn-default btn-sm" ng-click="addItem()">Add
+					Tier</button>
+				<div ng-repeat="tier in tiers">{{tier}}</div>
+			</accordion-group> 
+		
+			<accordion-group is-open="status.open">
+				<accordion-heading>
+					I can have markup, too! 
+					<i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': status.open, 'glyphicon-chevron-right': !status.open}"></i>
+				</accordion-heading> 
+					This is just some content to illustrate fancy headings. 
+			</accordion-group> 
+			
+			<br>
+						
+			<accordion-group heading="{{tab.title}}" ng-repeat="tab in filterTabs">
+				<div class="gridStyle" ng-grid="tab.grid"></div>    
+			</accordion-group> 
+			
+		</accordion>
+		
+			<div ng-repeat="tab in filterTabs">
+				<div>{{tab.title}}</div>
+				<div class="gridStyle" ng-grid="tab.grid"></div>    
+				<br>   
+			</div> 
+		
+		
+	</div>
+
+</body>
+</html>
